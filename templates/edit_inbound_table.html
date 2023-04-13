@@ -1,0 +1,188 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Subheader-->
+
+						<!--end::Subheader-->
+						<!--begin::Entry-->
+						<div  class="d-flex flex-column-fluid">
+							<!--begin::Container-->
+							<div class="container">
+
+
+
+                              <div class="flex-row-fluid ml-lg-8">
+										<!--begin::Card-->
+										<div class="card card-custom card-stretch">
+											<!--begin::Header-->
+											<div class="card-header py-1">
+												<div class="card-title align-items-start flex-column">
+													<h3 class="card-label font-weight-bolder text-dark">Edit Inbound Data</h3>
+													<span class="text-muted font-weight-bold font-size-sm mt-1"></span>
+												</div>
+{#												<div class="card-toolbar">#}
+{#													<button type="reset" class="btn btn-primary font-weight-bolder mr-2" id="leave_update">Apply</button>#}
+{#													<button type="reset" class="btn btn-light-primary font-weight-bolder" onClick="window.location.reload();">Cancel</button>#}
+{#												</div>#}
+											</div>
+											<!--end::Header-->
+											<!--begin::Form-->
+											<form method="POST">
+												<!--begin::Body-->
+                                                {% csrf_token %}
+												<div class="card-body">
+													<div class="row">
+														<label class="col-xl-3"></label>
+														<div class="col-lg-9 col-xl-6">
+{#															<h5 class="font-weight-bold mb-6">Customer Info</h5>#}
+														</div>
+													</div>
+
+                                                     <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Customer Code</label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="GRnum" type="text" value="{{ edit_inbound_table.GRnum }}" />
+														</div>
+													</div>
+                                                    <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Material Code </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="matcode" type="text" value="{{ edit_inbound_table.matcode }}" />
+														</div>
+													</div>      <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Material Description </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="matdesc" type="text" value="{{ edit_inbound_table.matdesc }}" />
+														</div>
+													</div>      <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Quantity </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="quantity" type="text" value="{{ edit_inbound_table.quantity }}" />
+														</div>
+													</div>      <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">UOM </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="uom" type="text" value="{{ edit_inbound_table.uom }}" />
+														</div>
+													</div> <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Scan Date </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="scan_date" type="text" value="{{ edit_inbound_table.scan_date }}" />
+														</div>
+													</div> <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Scan Time </label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="scan_time" type="text" value="{{ edit_inbound_table.scan_time }}" />
+														</div>
+													</div>
+                                                    <div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label text-right">Address</label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="serial_num" type="text" value="{{ edit_inbound_table.serial_num }}" />
+														</div>
+													</div>
+
+
+                                                    <div>
+
+                                                        <input class="form-control form-control-solid form-control-lg" value="{{ edit_inbound_table.id }}" id="id" name="emp_id" type="hidden" placeholder="Current Password" />
+{#                                                        <input class="form-control form-control-solid form-control-lg" value="{{ request.user.username }}" id="username" name="username" type="hidden" placeholder="Current Password" />#}
+                                                    </div>
+                                                </div>
+ <hr>
+                                                <div align="center">
+                                            <button type="button" id="save_master_data" class="btn btn-primary font-weight-bolder mr-2">save</button>
+{#                                             <button type="button"  class="btn btn-danger font-weight-bolder mr-2" data-toggle="modal" data-target="#modalLoginForm">Reject</button>#}
+                                        </div>
+
+											</form>
+<br>
+
+										</div>
+									</div>
+
+
+								<!--begin::Dashboard-->
+								<!--begin::Row-->
+								<!--end::Dashboard-->
+							</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Entry-->
+						 <div class="footer-bottom" align="center">
+                <div class="container">
+                    <div class="copyright-wrap">
+                        <p>© <span id="currentYear">2022</span> Innovasiv Technologies All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+					</div>
+
+
+<script>
+ $(document).ready(function(){
+
+    $(document).on('click', '#save_master_data', function(){
+
+
+        var id = $("#id").val();
+        var GRnum = $("#GRnum").val();
+        var matcode = $("#matcode").val();
+        var matdesc = $("#matdesc").val();
+        var quantity = $("#quantity").val();
+        var uom = $("#uom").val();
+        var scan_date = $("#scan_date").val();
+        var scan_time = $("#scan_time").val();
+        var serial_num = $("#serial_num").val();
+
+
+alert(id)
+        {#console.log(id)#}
+        {#console.log(customer_code)#}
+        {#console.log(customer_name)#}
+        {#console.log(address)#}
+
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "{%  url 'edit_inbound_post' %}",
+                data:{
+                    id:id,
+                    GRnum: GRnum,
+                    matcode:matcode,
+                    matdesc: matdesc,
+                    quantity: quantity,
+                    uom: uom,
+                    scan_date: scan_date,
+                    scan_time: scan_time,
+                    serial_num: serial_num,
+
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function (html){
+                                  Swal.fire({
+                                    title: "Success",
+                                    text: "Successfully Applied...!",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer:1500
+                                }).then(function () {
+                                 window.location.reload();
+                                });
+                // $("#cloc").removeAttr("disabled", "disabled");
+            },
+                error:function (){
+                    alert("error");
+                }
+            });
+
+
+    });
+});
+</script>
+
+{% endblock content %}
